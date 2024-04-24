@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react'
-import { SidebarData } from './SidebarData'
+import { SidebarData } from './FrontEndData'
 import SidebarIcon from './SidebarIcon';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { auth } from './firebase';
@@ -27,7 +27,7 @@ const Sidebar = () => {
             className='row'
             onClick={() => auth.signOut()}>
                 <div id = "icon">{<ExitToAppIcon />}</div>
-                <div id = "title">サインアウト</div>
+                <div id = "title" className='text-left'>サインアウト</div>
             </button>
         </ul>
     </div>
