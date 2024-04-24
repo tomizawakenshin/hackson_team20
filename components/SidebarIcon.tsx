@@ -4,8 +4,12 @@ import { auth } from './firebase'
 function SidebarIcon() {
   return (
     <div className='SidebarIcon'>
-        <p className='text-5xl'>MediNav</p>
-        <img src = {auth.currentUser?.photoURL} alt= ""/>
+      <a href='/'>
+        <h1 className='text-3xl py-3 text-white'>MediNav</h1>
+      </a>
+        <div className='flex items-center justify-center'>
+          <img src = {auth.currentUser?.photoURL} alt= ""/>
+        </div>
         <p>{auth.currentUser?.email}</p>
     </div>
   )
