@@ -8,10 +8,11 @@ const firebaseConfig = {
   storageBucket: "hackathon-team20.appspot.com",
   messagingSenderId: "244364540788",
   appId: "1:244364540788:web:ca228b46917d0d386c8a21",
-  measurementId: "G-Y89DL9BK52"
+  measurementId: "G-Y89DL9BK52",
+  databaseURL: "https://hackathon-team20-default-rtdb.asia-southeast1.firebasedatabase.app/"
 };
 
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
