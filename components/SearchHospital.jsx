@@ -3,7 +3,6 @@
 import { useEffect, useState, } from 'react';
 import React from 'react'
 import '/app/researchHospital.css';
-import Sidebar from '@/components/Sidebar';
 
 function MyComponent() {
   const [address, setAddress] = useState('');
@@ -132,25 +131,18 @@ function displaySearchResults(results) {
 }
 
   return (
-    <div className='flex'>
-        <Sidebar />
-        <div className="main w-full">
-            <div className='font-bold pr-20'>
-                現在の状態を教えてください
-            </div>
-            <div className="search-container">
-                <input
-                type="text"
-                className="search-input"
-                placeholder="検索"
-                value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
-                />
-                <button className="search-button" id="researchHospital" onClick={searchHospital}>検索</button>
-            </div>
-            {displaySearchResults(searchResults)}
-        </div>
-
+    <div className="main">
+      <div className="search-container">
+        <input
+          type="text"
+          className="search-input"
+          placeholder="検索"
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
+        />
+        <button className="search-button" id="researchHospital" onClick={searchHospital}>検索</button>
+      </div>
+      {displaySearchResults(searchResults)}
     </div>
   );
 }

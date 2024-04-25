@@ -5,7 +5,7 @@ import "./globals.css";
 const font = Figtree({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Medi-Nav",
+  title: "MediGuide",
   description: "",
 };
 

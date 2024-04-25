@@ -19,7 +19,7 @@ const Login = () => {
                         <main className='grow'>
                             <section className='container mx-auto'>
                                 <h2 className='my-16 text-6xl font-bold text-center'>
-                                   <span>MediNav</span>へようこそ！
+                                   <span>MediGuide</span>へようこそ！
                                 </h2>
                                 <div className='my-16 text-center text-3xl'>
                                     <div className='py-5'>
@@ -28,18 +28,20 @@ const Login = () => {
                                     <div className='py-5'>
                                         サポートするために開発されました。
                                     </div>
-                                    <div className='pt-60'>
+                                    <div className='pt-24 text-sky-300 font-bold'>
                                         このwebアプリではこんな機能が使用できます！
                                     </div>
                                 </div>
                                 <div className='flex'>
                                     {TutorialData.map((value, key) =>{
                                         return(
-                                            <div key ={key} className=''>
+                                            <div key ={key} className='border-2'>
                                                 <div className='font-bold px-14 text-lg'>
                                                     {value.description}
                                                 </div>
-                                                <Image src = {value.img} width = "100" height="100" alt=""/>
+                                                <div className='flex justify-center pt-10'>
+                                                    <Image src = {value.img} width = "100" height="100" alt=""/>
+                                                </div>
                                             </div>
                                         )
                                     })}

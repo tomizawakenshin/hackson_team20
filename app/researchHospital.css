@@ -12,7 +12,7 @@ body, html {
     padding: 0 20px;
 }
 .main {
-    height: 100%;
+    height: auto !important;
     background-color: #f2f2f2;
     padding: 20px;
     display: flex;
@@ -52,39 +52,45 @@ body, html {
 /* 検索結果の表のスタイル */
 .search-results-table {
     width: 100%;
+  }
+  
+  /* 検索結果の行のスタイル */
+  .search-result-row {
+    width: 100% !important;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin: 30px 0px;
-}
-
-/* 検索結果の行のスタイル */
-.search-result-row {
-    width: 30%;
+    justify-content: space-between; /* 要素を等間隔で配置 */
     margin-bottom: 20px;
-    border: 2px solid #ccc;
-    padding: 10px;
-}
-
-/* 検索結果のセルのスタイル */
-.search-result-cell {
-    display: flex;
-    flex-direction: column;
-}
-
-/* 検索結果のタイトルのスタイル */
-.result-title {
+  }
+  
+  /* 検索結果のセルのスタイル */
+  .search-result-cell {
+    width: 48%; /* セルの幅を調整 */
+    border: 2px solid #ccc; /* 枠線 */
+    padding: 10px; /* セル内の余白 */
+  }
+  
+  /* 検索結果のタイトルのスタイル */
+  .search-result-title {
     color: blue;
     text-decoration: none;
     margin-bottom: 5px;
-}
-
-.result-title:hover {
+  }
+  
+  .search-result-title:hover {
     text-decoration: underline;
-}
-
-/* 検索結果のURLのスタイル */
-.result-url {
+  }
+  
+  /* 検索結果のURLのスタイル */
+  .search-result-url {
     color: #333;
     font-size: 14px;
-}
+  }
+  
+  /* 検索結果の画像のスタイル */
+  .search-result-image {
+    max-width: 100%; /* 画像の最大幅 */
+    height: auto; /* 高さを自動調整 */
+    display: block; /* 画像をブロック要素として配置 */
+    margin-top: 10px; /* 上部の余白 */
+  }
+  
