@@ -13,6 +13,8 @@ const page = () => {
             text-center
             text-9xl
             '>ここにカレンダー機能を実装</p>
+
+            
         </div>
     </div>
   )
