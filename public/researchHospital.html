@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        .header {
+            background-color: #CFFEEF;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 0 20px;
+        }
+        .main {
+            height: 100%;
+            background-color: #f2f2f2;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+        .logout-button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .search-container {
+            width: 50%;
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+        }
+        .search-input {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+        }
+        .search-button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            outline: none;
+        }
+        /* 検索結果の表のスタイル */
+        .search-results-table {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap; /* セルが折り返されるようにする */
+            justify-content: space-around; /* セルを均等に配置 */
+            margin: 30px 0px;
+        }
+
+        /* 検索結果の行のスタイル */
+        .search-result-row {
+            width: 30%; /* セルの幅を設定 */
+            margin-bottom: 20px; /* 行の間隔を設定 */
+            border: 2px solid #ccc; /* 枠線のスタイル */
+            padding: 10px; /* 行の余白 */
+        }
+
+        /* 検索結果のセルのスタイル */
+        .search-result-cell {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 検索結果のタイトルのスタイル */
+        .result-title {
+            color: blue; /* タイトルの色 */
+            text-decoration: none; /* 下線なし */
+            margin-bottom: 5px; /* タイトルとURLの間隔を設定 */
+        }
+
+        .result-title:hover {
+            text-decoration: underline; /* マウスオーバー時に下線を表示 */
+        }
+
+        /* 検索結果のURLのスタイル */
+        .result-url {
+            color: #333; /* URLの色 */
+            font-size: 14px; /* フォントサイズ */
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+    </header>
+    <div class="main">
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="検索" value="">
+            <button class="search-button" id="researchHospital">検索</button>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_r6XctDWr1H8MiGuBOrqTNFsL3imHV5o&callback=initMap" defer></script>
+    <script>
+        // 位置情報取得
+        // getGeolocationAddress 関数をグローバルスコープに定義
+        async function getGeolocationAddress(latitude, longitude) {
+            const geocoder = new google.maps.Geocoder();
+            const latlng = {
+                lat: latitude,
+                lng: longitude
+            };
+
+            try {
+                const response = await geocoder.geocode({ location: latlng });
+                if (response && response.results && response.results.length > 0) {
+                    return response.results[0].formatted_address;
+                } else {
+                    return "住所が見つかりません";
+                }
+            } catch (error) {
+                console.error("Geocoder failed due to: ", error);
+                return "Geocoderエラー: " + error.message;
+            }
+        }
+
+        // 位置情報取得と住所の取得
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(async function (position) {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+                const address = await getGeolocationAddress(latitude, longitude);
+                console.log(address);
+
+                // 検索窓の情報をAjax通信で検索
+                $('#researchHospital').on('click', function(){
+                    var apiKey = 'AIzaSyAcJ-apLCQRIn04yW12exu_zMphmEWKNts'; // Google Custom Search JSON APIのAPIキー
+                    var addressPart = address.match(/〒\d{3}-\d{4}\s(.*)/);
+                    var keyword = addressPart[1] +"%20"+ $('.search-input').val() +"%20"+ "病院"; // 検索窓の値を取得して検索キーワードとする
+                    console.log(keyword);
+                    // Google Custom Search JSON APIのURLを構築
+                    var apiUrl = 'https://www.googleapis.com/customsearch/v1?key=AIzaSyCpZhWM3DxJVyfeZpmGFeTvaWJh6Rb8v0Y&cx=e14ae0429ae364f60&q=' + keyword + '&num=5';
+                    console.log("URL: ", apiUrl);
+                    // Ajax通信を行う
+                    $.ajax({
+                        url: apiUrl,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(response){
+                            console.log('検索結果:', response.items);
+                            displaySearchResults(response.items);
+                        },
+                        error: function(xhr, status, error){
+                            // Ajax通信が失敗した場合の処理
+                            console.error(xhr.responseText); // エラーメッセージをコンソールに出力（デバッグ用）
+                        }
+                    });
+                });
+            });
+        } else {
+            console.log("このブラウザでは位置情報の取得がサポートされていません");
+        }
+        
+        // 検索結果を表示する関数
+        function displaySearchResults(results) {
+            var mainContainer = document.querySelector('.main');
+
+            // 検索結果を表示するテーブルを作成
+            var table = document.createElement('table');
+            table.classList.add('search-results-table');
+
+            // 5つの横並びの四角を作成
+            for (var i = 0; i < 5; i++) {
+                var row = document.createElement('tr');
+                row.classList.add('search-result-row');
+
+                var cell = document.createElement('td');
+                cell.classList.add('search-result-cell');
+
+                if (results[i]) {
+                    var title = document.createElement('a');
+                    title.classList.add('result-title');
+                    title.textContent = results[i].title;
+                    title.href = results[i].link;
+                    title.target = '_blank'; // 新しいタブで開く
+
+                    var url = document.createElement('p');
+                    url.classList.add('result-url');
+                    url.textContent = results[i].link;
+
+                    var image = document.createElement('img');
+                    image.src = results[i].imageLink; // 画像のリンク
+
+                    cell.appendChild(title);
+                    cell.appendChild(url);
+                    cell.appendChild(image); // 画像をセルに追加
+                }
+
+                row.appendChild(cell);
+                table.appendChild(row);
+            }
+
+            // 検索結果テーブルを追加する前に既存の検索結果を削除
+            var existingTable = mainContainer.querySelector('.search-results-table');
+            if (existingTable) {
+                mainContainer.removeChild(existingTable);
+            }
+
+            // 検索結果テーブルを追加
+            mainContainer.appendChild(table);
+        }
+    </script>
+</body>
+</html>
