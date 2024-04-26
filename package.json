@@ -14,8 +14,10 @@
     "@firebase/messaging-types": "^0.6.1",
     "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.15.15",
+
     "@supabase/supabase-js": "^2.42.4",
     "date-fns": "^3.6.0",
+
     "firebase": "^10.11.0",
     "firebase-admin": "^12.1.0",
     "firebase-functions": "^4.9.0",
@@ -35,7 +37,6 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.1",
     "postcss": "^8.4.38",
-    "prisma": "^5.12.1",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.4.5"
   }

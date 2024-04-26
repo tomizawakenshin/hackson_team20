@@ -11,12 +11,14 @@ const page: React.FC = () => {
 
   return (
     <div className='App'>
+
       <div className='gap-4'>
         <div className='Sidebar'>
           <Sidebar />
         </div>
         <div className='text-center text-xs'>
           <CalendarComponent />
+
         </div>
       </div>
     </div>

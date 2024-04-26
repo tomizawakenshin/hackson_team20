@@ -1,0 +1,96 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+.header {
+    background-color: #CFFEEF;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 20px;
+}
+.main {
+    height: auto !important;
+    background-color: #f2f2f2;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.logout-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.search-container {
+    width: 50%;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+}
+.search-input {
+    width: 70%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+}
+.search-button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    outline: none;
+}
+/* 検索結果の表のスタイル */
+.search-results-table {
+    width: 100%;
+  }
+  
+  /* 検索結果の行のスタイル */
+  .search-result-row {
+    width: 100% !important;
+    display: flex;
+    justify-content: space-between; /* 要素を等間隔で配置 */
+    margin-bottom: 20px;
+  }
+  
+  /* 検索結果のセルのスタイル */
+  .search-result-cell {
+    width: 48%; /* セルの幅を調整 */
+    border: 2px solid #ccc; /* 枠線 */
+    padding: 10px; /* セル内の余白 */
+  }
+  
+  /* 検索結果のタイトルのスタイル */
+  .search-result-title {
+    color: blue;
+    text-decoration: none;
+    margin-bottom: 5px;
+  }
+  
+  .search-result-title:hover {
+    text-decoration: underline;
+  }
+  
+  /* 検索結果のURLのスタイル */
+  .search-result-url {
+    color: #333;
+    font-size: 14px;
+  }
+  
+  /* 検索結果の画像のスタイル */
+  .search-result-image {
+    max-width: 100%; /* 画像の最大幅 */
+    height: auto; /* 高さを自動調整 */
+    display: block; /* 画像をブロック要素として配置 */
+    margin-top: 10px; /* 上部の余白 */
+  }
+  

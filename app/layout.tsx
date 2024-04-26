@@ -5,8 +5,8 @@ import "./globals.css";
 const font = Figtree({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Clone-App",
-  description: "Listen to Music",
+  title: "MediGuide",
+  description: "",
 };
 
 export default function RootLayout({
