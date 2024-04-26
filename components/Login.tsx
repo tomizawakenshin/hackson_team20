@@ -1,13 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react';
 import { useAuthState } from "react-firebase-hooks/auth"
 import { signInWithPopup } from 'firebase/auth'
 import { auth, provider } from './firebase'
 import Sidebar from './Sidebar'
 import { TutorialData } from './FrontEndData'
+import { getDatabase, ref, set } from "firebase/database"
 import Image from "next/image"
 
 const Login = () => {
     const [user] = useAuthState(auth);
+
+    // ユーザーがログインしたら、そのユーザーの情報をデータベースに保存する
+    useEffect(() => {
+        if (user) {
+            const db = getDatabase();
+            const userRef = ref(db, `users/${user.uid}`);
+            set(userRef, {
+                email: user.email,
+                displayName: user.displayName,
+            });
+        }
+    }, [user]);
+
   return (
     <div>
         {user ? (
@@ -64,7 +78,7 @@ function SignInButton() {
         signInWithPopup(auth, provider);
     }
   return (
-    <button 
+    <button
         onClick={signInWithGoogle}
         className='
             pt-14

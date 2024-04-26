@@ -2,6 +2,7 @@
 
 import { useEffect, useState, } from 'react';
 import React from 'react'
+import { useEffect, useState, React } from 'react';
 import '/app/researchHospital.css';
 import Sidebar from '@/components/Sidebar';
 
