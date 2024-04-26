@@ -1,22 +1,66 @@
-import React from 'react'
+import React, { useEffect } from 'react';
 import { useAuthState } from "react-firebase-hooks/auth"
 import { signInWithPopup } from 'firebase/auth'
 import { auth, provider } from './firebase'
 import Sidebar from './Sidebar'
+import { TutorialData } from './FrontEndData'
+import { getDatabase, ref, set } from "firebase/database"
+import Image from "next/image"
 
 const Login = () => {
     const [user] = useAuthState(auth);
+
+    // ユーザーがログインしたら、そのユーザーの情報をデータベースに保存する
+    useEffect(() => {
+        if (user) {
+            const db = getDatabase();
+            const userRef = ref(db, `users/${user.uid}`);
+            set(userRef, {
+                email: user.email,
+                displayName: user.displayName,
+            });
+        }
+    }, [user]);
+
   return (
     <div>
         {user ? (
-            <div className='gap-4'>
+            <div className='flex'>
                 <div className='Sidebar'>
                     <Sidebar />
                 </div>
-                <p className='
-                text-center
-                text-9xl
-                '>ここにホーム情報を記述</p>
+                <div className = 'w-full h-full'>
+                        <main className='grow'>
+                            <section className='container mx-auto'>
+                                <h2 className='my-16 text-6xl font-bold text-center'>
+                                   <span>MediNav</span>へようこそ！
+                                </h2>
+                                <div className='my-16 text-center text-3xl'>
+                                    <div className='py-5'>
+                                        このwebアプリは長期的な診察を必要とする人々を
+                                    </div>
+                                    <div className='py-5'>
+                                        サポートするために開発されました。
+                                    </div>
+                                    <div className='pt-60'>
+                                        このwebアプリではこんな機能が使用できます！
+                                    </div>
+                                </div>
+                                <div className='flex'>
+                                    {TutorialData.map((value, key) =>{
+                                        return(
+                                            <div key ={key} className=''>
+                                                <div className='font-bold px-14 text-lg'>
+                                                    {value.description}
+                                                </div>
+                                                <Image src = {value.img} width = "100" height="100" alt=""/>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            </section>
+                        </main>
+                </div>
             </div>
         ) : (
             <div className='signInScreen'>
@@ -32,7 +76,7 @@ function SignInButton() {
         signInWithPopup(auth, provider);
     }
   return (
-    <button 
+    <button
         onClick={signInWithGoogle}
         className='
             pt-14
