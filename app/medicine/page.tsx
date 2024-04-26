@@ -6,11 +6,11 @@ import React from 'react'
 const page = () => {
   return (
     <div className='App'>
-        <div className='gap-4 flex pt-10'>
+        <div className='gap-52 flex'>
             <div className='Sidebar'>
                 <Sidebar />
             </div>
-            <div className='text-3xl'>
+            <div className='text-3xl px-36'>
               <MedicineReminder />
             </div>
         </div>
