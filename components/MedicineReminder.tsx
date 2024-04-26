@@ -99,9 +99,9 @@ const MedicineReminder: React.FC = () => {
   }
 
   return (
-    <main className="container mx-auto py-8">
+    <main className="container py-40 px-60">
       <h1 className="text-3xl font-bold mb-4">服薬リマインダー</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-20">
         <div>
           <label htmlFor="medicineName" className="block font-medium">
             薬名 <span className="text-red-500">*</span>
