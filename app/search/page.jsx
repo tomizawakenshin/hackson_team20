@@ -4,6 +4,7 @@ import { useEffect, useState, React } from 'react';
 import '/app/researchHospital.css';
 import Sidebar from '@/components/Sidebar';
 
+
 function MyComponent() {
   const [address, setAddress] = useState('');
   const [searchInput, setSearchInput] = useState('');
