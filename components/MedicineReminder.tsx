@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { app, auth } from './firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { getDatabase, ref, set, onValue, push, remove } from "firebase/database";
+import { twMerge } from 'tailwind-merge';
 
 interface Medicine {
   id?: string;
@@ -99,68 +100,69 @@ const MedicineReminder: React.FC = () => {
   }
 
   return (
-    <main className="container py-40 px-60">
-      <h1 className="text-3xl font-bold mb-4">服薬リマインダー</h1>
-      <form onSubmit={handleSubmit} className="space-y-20">
-        <div>
-          <label htmlFor="medicineName" className="block font-medium">
-            薬名 <span className="text-red-500">*</span>
-          </label>
-          <input
-            type="text"
-            name="medicineName"
-            placeholder="頭痛薬"
-            value={newMedicine.medicineName}
-            onChange={handleChange}
-            required
-            className="border border-gray-300 rounded-md py-2 px-3 w-full"
-          />
-          {errors.medicineName && <p className="text-red-500">{errors.medicineName}</p>}
-        </div>
-        <div>
-          <label htmlFor="dose" className="block font-medium">
-            １回服用量 <span className="text-red-500">*</span>
-          </label>
-          <input
-            type="number"
-            name="dose"
-            min="1"
-            max="10"
-            value={newMedicine.dose}
-            onChange={handleChange}
-            required
-            className="border border-gray-300 rounded-md py-2 px-3 w-full"
-          />
-          {errors.dose && <p className="text-red-500">{errors.dose}</p>}
-        </div>
-        <div>
-          <label htmlFor="timing" className="block font-medium">
-            服用時間 <span className="text-red-500">*</span>
-          </label>
-          <input
-            type="time"
-            name="timing"
-            value={newMedicine.timing}
-            onChange={handleChange}
-            required
-            className="border border-gray-300 rounded-md py-2 px-3 w-full"
-          />
-          {errors.timing && <p className="text-red-500">{errors.timing}</p>}
-        </div>
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-          disabled={Object.values(errors).some(error => error)}
-        >
-          追加
-        </button>
-      </form>
-      <div className="mt-8">
+    <main className="container flex  w-full">
+      <div className=''>
+        <form onSubmit={handleSubmit} className="space-y-20 flex-col flex pl-72 pr-48">
+          <div className='pt-10'>
+            <label htmlFor="medicineName" className="block font-medium text-stone-600">
+              お薬名 <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              name="medicineName"
+              placeholder="(例)頭痛薬"
+              value={newMedicine.medicineName}
+              onChange={handleChange}
+              required
+              className="border border-gray-300 rounded-md py-2 px-3 w-full"
+            />
+            {errors.medicineName && <p className="text-red-500">{errors.medicineName}</p>}
+          </div>
+          <div>
+            <label htmlFor="dose" className="block font-medium text-stone-600">
+              １回服用量 <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="number"
+              name="dose"
+              min="1"
+              max="10"
+              value={newMedicine.dose}
+              onChange={handleChange}
+              required
+              className="border border-gray-300 rounded-md py-2 px-3 w-full"
+            />
+            {errors.dose && <p className="text-red-500">{errors.dose}</p>}
+          </div>
+          <div>
+            <label htmlFor="timing" className="block font-medium text-stone-600">
+              服用するタイミング <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="time"
+              name="timing"
+              value={newMedicine.timing}
+              onChange={handleChange}
+              required
+              className="border border-gray-300 rounded-md py-2 px-3 w-full"
+            />
+            {errors.timing && <p className="text-red-500">{errors.timing}</p>}
+          </div>
+          <button
+            type="submit"
+            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+            disabled={Object.values(errors).some(error => error)}
+          >
+            追加
+          </button>
+        </form>
+      </div>
+      <div className="border-8 flex-auto">
         {medicines.map(([id, medicine], index) => (
-          <div key={id} className="bg-gray-100 rounded-md p-4 mb-4">
-            <p className="font-medium mb-2">{index + 1}. {medicine.medicineName}</p>
-            <p className="text-gray-600">服用量: {medicine.dose} 錠</p>
-            <p className="text-gray-600">服用時間: {medicine.timing} </p>
+          <div key={id} className=" rounded-md p-4 mb-4">
+            <p className="font-medium mb-2 text-stone-600">{index + 1}. {medicine.medicineName}</p>
+            <p className="text-stone-600">服用量 : {medicine.dose} 錠</p>
+            <p className="text-stone-600">服用時間 : <span className="text-blue-500">{medicine.timing}</span></p>
             <button
               onClick={() => handleRemove(id)}
               className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 mt-2"
