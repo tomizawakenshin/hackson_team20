@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
-import { Calendar, momentLocalizer } from 'react-big-calendar';
+import { Calendar, momentLocalizer, Views } from 'react-big-calendar';
 import moment from 'moment';
 import 'moment/locale/ja';
 import { collection, query, getDocs, doc, getDoc, addDoc, updateDoc, deleteDoc } from 'firebase/firestore';
@@ -8,6 +8,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import Modal from './Modal';
 import styles from './calendar.module.css'
+import { event } from 'firebase-functions/v1/analytics';
 
 const localizer = momentLocalizer(moment);
 
@@ -247,10 +248,10 @@ const CalendarComponent: React.FC = () => {
             {/* カレンダー画面 */}
             {fetchError && <p>{fetchError}</p>}
             <div className={styles.calendar}>
-                <button onClick={() => handleViewChange('month')}>月</button>
-                <button onClick={() => handleViewChange('week')}>週</button>
-                <button onClick={() => handleViewChange('day')}>日</button>
-                <button onClick={() => handleViewChange('agenda')}>アジェンダ</button>
+                <button onClick={() => handleViewChange('month')} style={{position:'relative',right:'-411px',top:'33px',width:'80px',height:'30px'}}></button>
+                <button onClick={() => handleViewChange('week')} style={{position:'relative',right:'-411px',top:'33px',width:'73px',height:'30px'}}></button>
+                <button onClick={() => handleViewChange('day')} style={{position:'relative',right:'-411px',top:'33px',width:'60px',height:'30px'}}></button>
+                <button onClick={() => handleViewChange('agenda')} style={{position:'relative',right:'-411px',top:'33px',width:'90px',height:'30px'}}></button>
                 <Calendar
                     localizer={localizer}
                     events={loading || error ? [] : events}
