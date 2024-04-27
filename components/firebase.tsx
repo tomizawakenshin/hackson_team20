@@ -22,4 +22,3 @@ const db = getFirestore(app);   //データベース操作のためにFirestore�
 const messaging = getMessaging(app);  //Firebase Cloud Messagingを初期化
 
 export {auth, provider, db, messaging};
-
