@@ -1,6 +1,7 @@
 "use client";
 
 import Login from "@/components/Login";
+import ScheduleNotification from "../calendar/ScheduleNotification";
 
 export default function Home() {
  
@@ -8,6 +9,7 @@ export default function Home() {
     <div className="">
       <div>
             <Login />
+            <ScheduleNotification />
       </div>
     </div>
     
