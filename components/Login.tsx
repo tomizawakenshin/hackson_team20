@@ -65,7 +65,7 @@ const Login = () => {
                 </div>
             </div>
         ) : (
-            <div className='signInScreen'>
+            <div>
                 <SignInButton />
             </div>
         )}
@@ -78,26 +78,22 @@ function SignInButton() {
         signInWithPopup(auth, provider);
     }
   return (
-    <button
-        onClick={signInWithGoogle}
-        className='
-            pt-14
-            lounded-lg
-            items-center
-            flex'>
-        <p className='
-            text-3xl
-            font-bold
-            cursor-pointer
-            bg-orange-300
-            text-white
-            p-7
-            rounded-full
-            shadow-2xl
-            '>
-            グーグルでサインイン
-        </p>
-    </button>
+    <div className='min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-400 to-purple-600'>
+        <div className="absolute inset-0 bg-black opacity-50"></div>
+        <div className="relative z-10 max-w-md w-full p-8 bg-blue-100 bg-opacity-75 rounded-lg shadow-lg">
+            <h2 className="font-semibold text-6xl text-center py-1.5 mb-4 text-white">
+                <span>MediGuide</span>
+            </h2>
+            <button onClick={signInWithGoogle} className="rounded-lg flex items-center justify-center mx-auto">
+                <p className="text-xl font-bold cursor-pointer bg-orange-300 text-white p-4 rounded-full shadow-2xl">
+                    グーグルでサインイン
+                </p>
+            </button>
+            <div className="mt-8">
+                <p className="text-gray-500 text-sm text-center">© 2024 MediGuide. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
   )
 }
 
