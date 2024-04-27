@@ -102,7 +102,7 @@ const MedicineReminder: React.FC = () => {
   return (
     <main className="container flex space-x-20">
       <div className='w-full'>
-        <div className='h-full'>
+        <div className=''>
           <div className='py-10 bg-pink-100 text-center rounded-lg'>
             <h1 className="text-3xl font-bold mb-4 text-stone-600">お薬リスト</h1>
           </div>
