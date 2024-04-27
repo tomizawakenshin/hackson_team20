@@ -48,6 +48,8 @@ const CalendarComponent: React.FC = () => {
     const [showDetailsModal, setShowDetailsModal] = useState<boolean>(false);
     const [showEditModal, setShowEditModal] = useState<boolean>(false);
     const [fetchError, setFetchError] = useState<string | null>(null);
+    const [currentDate, setCurrentDate] = useState<Date>(new Date());
+    const [currentView, setCurrentView] = useState<string>('month');
 
     // カレンダーに予定を表示するためにスケジュール取得
     useEffect(() => {
@@ -182,6 +184,14 @@ const CalendarComponent: React.FC = () => {
         setShowAddModal(false);
     };
 
+    const handleViewChange = (view: string) => {
+        setCurrentView(view);
+    };
+
+    const handleNavigate = (date: Date, view: string) => {
+        setCurrentDate(date);
+        setCurrentView(view);
+    };
 
     return (
         <div>
@@ -237,6 +247,10 @@ const CalendarComponent: React.FC = () => {
             {/* カレンダー画面 */}
             {fetchError && <p>{fetchError}</p>}
             <div className={styles.calendar}>
+                <button onClick={() => handleViewChange('month')}>月</button>
+                <button onClick={() => handleViewChange('week')}>週</button>
+                <button onClick={() => handleViewChange('day')}>日</button>
+                <button onClick={() => handleViewChange('agenda')}>アジェンダ</button>
                 <Calendar
                     localizer={localizer}
                     events={loading || error ? [] : events}
@@ -244,6 +258,10 @@ const CalendarComponent: React.FC = () => {
                     endAccessor="end"
                     style={{ height: 500 }}
                     onSelectEvent={handleSelectEvent}
+                    views={['month', 'week', 'day', 'agenda']}
+                    date={currentDate}
+                    view={currentView}
+                    onNavigate={handleNavigate}
                 />
             </div>
             {/* 予定が選択された時にイベントの詳細を表示するモーダル */}
